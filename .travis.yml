@@ -11,4 +11,4 @@ before_install:
 
 script:
   - docker build -t chainsaw:test .
-  - skaffold render --offline=true
+  - skaffold config set local-cluster true && skaffold render --offline=true
