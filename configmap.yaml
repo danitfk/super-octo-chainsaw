@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chainsaw-csv
+data:
+  test.csv: |
+    Id, name, hash
+    1, text, jnaosjnjasn65
+    2, foo, ijbasdian54
+    3, bar, djnaiondjas

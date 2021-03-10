@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: super-octo-chainsaw
+build:
+  artifacts:
+    - image: chainsaw
+      sync:
+        infer:
+          - '**/*.py'
+deploy:
+  kubectl:
+    manifests:
+      - deployment.yaml
+      - service.yaml
+      - configmap.yaml

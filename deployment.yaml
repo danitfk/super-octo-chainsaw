@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chainsaw
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chainsaw
+  template:
+    metadata:
+      labels:
+        app: chainsaw
+    spec:
+      containers:
+        - name: chainsaw
+          image: chainsaw
+          ports:
+          - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+            successThreshold: 5
+          volumeMounts:
+          - name: chainsaw-csv
+            mountPath: /tmp/test.csv
+            subPath: test.csv
+      volumes:
+        - name: chainsaw-csv
+          configMap:
+            name: chainsaw-csv

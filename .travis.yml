@@ -1,0 +1,14 @@
+dist: xenial
+sudo: enabled
+services:
+  - docker
+language: python
+node_js:
+  - "8"
+before_install:
+  - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.20.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+  - curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin/
+
+after_success:
+  - docker build -t chainsaw:test .
+  - skaffold render --offline=true
